@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Montserrat:wght@100;400&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function previewImage() {
+        var preview = document.querySelector("#new");
+        var file = document.querySelector("input[type=file]").files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          preview.src = reader.result;
+        };
+
+        if (file) {
+          reader.readAsDataURL(file);
+        } else {
+          preview.src = "";
+        }
+      }
+      function enableUploadButton() {
+    var uploadButton = document.getElementById("uploadButton1");
+    uploadButton.disabled = false;  // Enable the button
+  }
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='index.css') }}"
+    />
+    <title>Image Classification</title>
+    <style></style>
+  </head>
+  <body>
+    <div class="w-100">
+      <nav class="bg-body-tertiary" style="border-bottom: 2px solid black">
+        <div class="container w-50">
+          <div class="row my-0" style="">
+            <div class="col d-flex justify-content-center">
+              <img
+                class=""
+                style="width: 100px"
+                src="{{ url_for('static', filename='icon.svg') }}"
+              />
+              <h1 class="mt-auto mb-auto bitter">Pneumonia Classifier</h1>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="bg-dark">
+        <div class="container">
+          <div
+            class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg bg-body"
+          >
+            <div class="p-3 p-lg-5 pt-lg-3">
+              <h1 class="display-4 fw-bold lh-1 mb-5 ms-5">
+                Upload your CT image
+              </h1>
+              <form
+                action="/upload"
+                method="post"
+                enctype="multipart/form-data"
+              >
+              <div style="width: 65%; margin-left: auto">
+                
+                <input
+                    class="w-50"
+                    id="imageUpload"
+                    type="file"
+                    name="file"
+                    onchange="previewImage();enableUploadButton();"
+                    accept="image/*"
+                    style="display: none"
+                  />
+                </div>
+                <label for="imageUpload" class="btn btn-outline-info btn-lg px-4 me-sm-3 mt-2 fw-bold w-100">SELECT IMAGE</label>
+                <div class="mb-4 mb-lg-3 rounded-4 hover-shadow">
+                  <div
+                    class="shadow-lg mt-5 w-75 mx-auto rounded-4 hover-shadow"
+                  >
+                    <img
+                      class="rounded-lg-3 w-100 img-fluid rounded-4 hover-shadow"
+                      id="new"
+                      src=""
+                      alt=""
+                      width="360"
+                    />
+                  </div>
+                  <p class="text-black text-center mb-0 mt-1" style="font-size:medium; color: black;">
+                    Your uploaded image 
+                  </p>
+                </div>
+                
+
+                <input
+                
+                  type="submit"
+                  id="uploadButton1"
+                  class="btn btn-outline-success btn-lg px-4 me-sm-3 mt-2 fw-bold w-100"
+                  value="UPLOAD"
+                  disabled 
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark text-secondary" style="padding-top: 6%">
+      <div class="">
+        <p class="text-white mt-4" style="font-size: small; margin-left: 89%">
+          Made by Kamalnath
+        </p>
+      </div>
+    </div>
+  </body>
+  <footer></footer>
+</html>
